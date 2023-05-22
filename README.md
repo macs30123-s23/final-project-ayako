@@ -44,13 +44,22 @@ We run ARDL model with statsmodels package. Particulary, [UECM](https://www.stat
 $$
 \begin{align}
 \Delta\log(Export_{i,t}) &= \delta_0 + \lambda_0\log(Export_{t-1})+\lambda_1\log(EX_{t-1})+\lambda_2\log(GDP_{t-1})\\
-&+\sum_{j=1}^3\phi_j\Delta\log(Export_{t-j})+\sum_{j=0}^3\phi_j\Delta\log(EX_{t-j})+\sum_{j=0}^3\phi_j\Delta\log(GDP_{t-j})+\varepsilon_t\\
+&+\sum_{j=1}^3\phi_j\Delta\log(Export_{t-j})+\sum_{j=0}^3\rho_j\Delta\log(EX_{t-j})+\sum_{j=0}^3\eta_j\Delta\log(GDP_{t-j})+\varepsilon_t\\
 \Delta\log(Import_{i,t}) &= \delta_0 + \lambda_0\log(Import_{t-1})+\lambda_1\log(EX_{t-1})+\lambda_2\log(JapanGDP_{t-1})\\
-&+\sum_{j=1}^3\phi_j\Delta\log(Import_{t-j})+\sum_{j=0}^3\phi_j\Delta\log(EX_{t-j})+\sum_{j=0}^3\phi_j\Delta\log(JapanGDP_{t-j})
+&+\sum_{j=1}^3\phi_j\Delta\log(Import_{t-j})+\sum_{j=0}^3\rho_j\Delta\log(EX_{t-j})+\sum_{j=0}^3\eta_j\Delta\log(JapanGDP_{t-j})+\varepsilon_t
 \end{align}
 $$
 
 The subscript $i$ is for product and $t$ is for time. $Export,Import$ is the value of trade flows. $EX$ is exchange rate (Domestic Currency/Japan Yen). $GDP$ in the first equation is trading's partner GDP. $Japan_GDP$ is Japan's GDP. Our dataset contains 88 unique hs2 codes so that we run 176 regressions. The time period is 1988Q1-2023Q1. Missing value is droped. 
+
+We are interested in exchange rate elasticities. We can derive short and long-run coefficients following [3] and [4]. 
+
+$$
+\begin{align}
+\text{short-run coefficients}&: \frac{\rho_j}{\phi_j}\quad(j=1,2,3)\\
+\text{long-run coefficient}&: \frac{\lambda_1}{\lambda_0}
+\end{align}
+$$
 
 ## Pipelines
 * Scraping of recent trade statistics: [scraping.ipynb](https://github.com/macs30123-s23/final-project-ayako/blob/main/scraping.ipynb)
@@ -98,9 +107,58 @@ The subscript $i$ is for product and $t$ is for time. $Export,Import$ is the val
 * Run ARDL with Dask: [ARDL_dask.ipynb](https://github.com/macs30123-s23/final-project-ayako/blob/main/ARDL_dask.ipynb)
 
     * Run multiple ARDL regression for import and export for all hs2 codes. 
-    * Extract model summary and output results to csv. 
-    * Use Dask because ARDL model is available in latest statsmodels library and we could not install to Pysark. 
+    * Extract model summary and output results to csv. ([link](https://github.com/macs30123-s23/final-project-ayako/tree/main/results))
+    * Use Dask because ARDL model is available in latest statsmodels library and we could not install to Pysark. We configure Dask environment as follows where bootstrap code is stored [here](https://github.com/macs30123-s23/final-project-ayako/blob/main/bootstrap). 
 
+   ```
+   aws emr create-cluster --name "Dask-Cluster" \
+    --release-label emr-6.2.0 \
+    --applications Name=Hadoop \
+    --instance-type m5.xlarge \
+    --instance-count 6 \
+    --bootstrap-actions Path=s3://trade-final-project-bucket/bootstrap \
+    --use-default-roles \
+    --region us-east-1 \
+    --ec2-attributes '{"KeyName":"vockey"}'
+   ```
+
+## Results
+
+### EDA
+First, we conduct some basic data visualization to check the data is properly collected. 
+
+1. Top 10 trading partners
+<p align="center">
+  <img width="60%" src="images/exporting_partners.png" />
+</p>
+
+<p align="center">
+  <img width="60%" src="images/importing_partners.png" />
+</p>
+
+2. Time series of trade flows value in Top 10 trading partners
+<p align="center">
+  <img width="60%" src="images/timeseries_exporting_partners.png" />
+</p>
+
+<p align="center">
+  <img width="60%" src="images/timeseries_importing_partners.png" />
+</p>
+
+3. Top 10 products
+
+4. Time series of top 10 products in HScode basis. 
+<p align="center">
+  <img width="60%" src="images/timeseries_exporting_products.png" />
+</p>
+
+<p align="center">
+  <img width="60%" src="images/timeseries_importing_products.png" />
+</p>
+
+
+
+## Disscussion and Conclusion
 
 
 ## References
