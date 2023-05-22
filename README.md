@@ -4,7 +4,7 @@
  [Japanese Trade Statistics](https://www.e-stat.go.jp/en/stat-search/files?page=1&toukei=00350300&tstat=000001013141) and conducts 
  Big Data analysis with Data Visualization and Regression. 
  
-## Social Questions
+## Social science research problem
 
 Determining the factors that influence trade flows has been a prominent area of study in international financial literature (refer to [1] for an overview). One specific aspect that has garnered significant attention is the exchange rate elasticity of trade balance. Understanding this elasticity is crucial as countries often focus on currency devaluation as a means to improve their trade balance. However, empirical studies examining the J-curve effect hypothesis, which explores the trade response to devaluation in both the short and long term, have produced mixed results (refer to [2] for a review of the J-curve effect).
 
@@ -14,18 +14,87 @@ Furthermore, the integration of the global value chain (GVC) in recent years has
 
 Building upon Bahmani-Oskooee's methodology, the objective of our study is to analyze the exchange rate elasticities at the product level using up-to-date data and detailed bicountry and product level Japanese data. 
 
+## Justification of the importance of using scalable computing methods
+
+Obtaining access to detailed and granular trade statistics data from the Japanese government presents a valuable opportunity for our research. The availability of monthly data at such a high level of granularity, encompassing all trading partners and product codes for imports and exports, provides us with a comprehensive dataset. However, it is important to note that this level of granularity also results in a large dataset, with a total of 51,291,956 records. 
+
+While it may be tempting to rely on more aggregated data to simplify the analysis, doing so would lead to a loss of crucial information and subsequently reduce the precision of our estimates. To ensure that we extract the maximum insights and preserve the accuracy of our findings, it is imperative to employ large-scale computing methods throughout our research process. 
+
 ## Dataset
  
 * Trade Statistics
+
   Update Kaggle dataset with recent data. Monthly level data from 1988-2020 and most granular product level ([HS9 codes](https://www.trade.gov/harmonized-system-hs-codes)). 
     * [Kaggle 1988-2020](https://www.kaggle.com/datasets/zanjibar/100-million-data-csv)
     * [E-Stat](https://www.e-stat.go.jp/en/stat-search/files?page=1&toukei=00350300&tstat=000001013141): scarped with [API](https://www.e-stat.go.jp/api/en)
 * Exchange Rates
-  Downloaded quarter data of "National Currency Per U.S. Dollar, Period Average Rate" from [IMF](https://data.imf.org/?sk=4c514d48-b6ba-49ed-8ab9-52b0c1a0179b&sId=1390030341854). 
-* GDP
-  Downloaded quarter data of "Nominal, Domestic Currency, Seasonally Adjusted GDP" from [IMF](https://data.imf.org/?sk=4c514d48-b6ba-49ed-8ab9-52b0c1a0179b&sId=1390030341854). 
+
+  Downloaded monthly data of "National Currency Per U.S. Dollar, Period Average Rate" from [IMF](https://data.imf.org/?sk=4c514d48-b6ba-49ed-8ab9-52b0c1a0179b&sId=1390030341854). Eventually converted to National Currency Per Japan Yen in our analysis. 
   
-Since their is a mismatch between country codes between trade dataset and IMF dataset, we used `fuzzywuzzy' to match country names. 
+* GDP
+
+  Downloaded quarterly data of "Nominal, Domestic Currency, Seasonally Adjusted GDP" from [IMF](https://data.imf.org/?sk=4c514d48-b6ba-49ed-8ab9-52b0c1a0179b&sId=1390030341854). 
+  
+Since their is a mismatch between country codes between trade dataset and IMF dataset, we used `fuzzywuzzy' to match country names and then manually modify some mismatch.  
+
+## Model
+
+We run ARDL model with statsmodels package. Particulary, [UECM](https://www.statsmodels.org/devel/tsa.html#error-correction-models-ecm) is used, which can be described as following. 
+
+$$
+\delta
+$$
+
+## Pipelines
+* Scraping of recent trade statistics: [scraping.ipynb](https://github.com/macs30123-s23/final-project-ayako/blob/main/scraping.ipynb)
+
+    * This is done in local and not parallelize due to API's limitation. 
+  
+* Upload data to S3: [upload_data.ipynb](https://github.com/macs30123-s23/final-project-ayako/blob/main/upload_data.ipynb)
+
+    * Upload raw data files to S3. Some manipulation is done for small data (IMF's exchange rate and GDP data). 
+
+* Processing trade data with pyspark: [data_manipulation_pyspark.ipynb](https://github.com/macs30123-s23/final-project-ayako/blob/main/data_manipulation_pyspark.ipynb)
+
+    * Process old data from Kaggle and new data we scraped so that can be merged later. 
+    * We chose PySpark because it was impossible to handle large data with memory issue in our local environment. We also tried Dask but PySpark was a 
+      lot faster to do basic data manipulation. We configure PySpark environment as follows. 
+
+    ```
+    aws emr create-cluster \
+    --name "Spark Cluster" \
+    --release-label "emr-6.2.0" \
+    --applications Name=Hadoop Name=Hive Name=JupyterEnterpriseGateway Name=JupyterHub Name=Livy Name=Pig Name=Spark Name=Tez \
+    --instance-type m5.xlarge \
+    --instance-count 6 \
+    --use-default-roles \
+    --region us-east-1 \
+    --ec2-attributes '{"KeyName": "vockey"}' \
+    --configurations '[{"Classification": "jupyter-s3-conf", "Properties": {"s3.persistence.enabled": "true", "s3.persistence.bucket": "trade-final-project-bucket"}}]'
+    ```
+
+* EDA with pyspark: [EDA_pyspark.ipynb](https://github.com/macs30123-s23/final-project-ayako/blob/main/EDA_pyspark.ipynb)
+
+    * Merge old data from Kaggle and new data we scraped. 
+    * Add country and HS code information. 
+    * Data Visualization. 
+    * Similarly used Pyspark to work on large dataset. 
+
+* Prepare data for ARDL analysis with pyspark: [data_manipulation_ARDL_pyspark.ipynb](https://github.com/macs30123-s23/final-project-ayako/blob/main/data_manipulation_ARDL_pyspark.ipynb)
+
+    * Merge trade data with exchange rate data (monthly data). 
+    * Aggregate monthly data to quarterly data. Sum export value and average exchange rate. 
+    * Merge quarterly data with GDP data. 
+    * Change numerical data to log base. 
+    * Similarly used Pyspark to work on large dataset. 
+
+* Run ARDL with Dask: [ARDL_dask.ipynb](https://github.com/macs30123-s23/final-project-ayako/blob/main/ARDL_dask.ipynb)
+
+    * Run multiple ARDL regression for import and export for all hs2 codes. 
+    * Extract model summary and output results to csv. 
+    * Use Dask because ARDL model is available in latest statsmodels library and we could not install to Pysark. 
+
+
 
 ## References
 
