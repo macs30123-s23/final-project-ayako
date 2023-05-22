@@ -39,11 +39,18 @@ Since their is a mismatch between country codes between trade dataset and IMF da
 
 ## Model
 
-We run ARDL model with statsmodels package. Particulary, [UECM](https://www.statsmodels.org/devel/tsa.html#error-correction-models-ecm) is used, which can be described as following. 
+We run ARDL model with statsmodels package. Particulary, [UECM](https://www.statsmodels.org/devel/tsa.html#error-correction-models-ecm) is used based on [3] and [4], which can be described as following. 
 
 $$
-\delta
+\begin{align}
+\Delta\log(Export_{i,t}) &= \delta_0 + \lambda_0\log(Export_{t-1})+\lambda_1\log(EX_{t-1})+\lambda_2\log(GDP_{t-1})\\
+&+\sum_{j=1}^3\phi_j\Delta\log(Export_{t-j})+\sum_{j=0}^3\phi_j\Delta\log(EX_{t-j})+\sum_{j=0}^3\phi_j\Delta\log(GDP_{t-j})+\varepsilon_t\\
+\Delta\log(Import_{i,t}) &= \delta_0 + \lambda_0\log(Import_{t-1})+\lambda_1\log(EX_{t-1})+\lambda_2\log(JapanGDP_{t-1})\\
+&+\sum_{j=1}^3\phi_j\Delta\log(Import_{t-j})+\sum_{j=0}^3\phi_j\Delta\log(EX_{t-j})+\sum_{j=0}^3\phi_j\Delta\log(JapanGDP_{t-j})
+\end{align}
 $$
+
+The subscript $i$ is for product and $t$ is for time. $Export,Import$ is the value of trade flows. $EX$ is exchange rate (Domestic Currency/Japan Yen). $GDP$ in the first equation is trading's partner GDP. $Japan_GDP$ is Japan's GDP. Our dataset contains 88 unique hs2 codes so that we run 176 regressions. The time period is 1988Q1-2023Q1. Missing value is droped. 
 
 ## Pipelines
 * Scraping of recent trade statistics: [scraping.ipynb](https://github.com/macs30123-s23/final-project-ayako/blob/main/scraping.ipynb)
