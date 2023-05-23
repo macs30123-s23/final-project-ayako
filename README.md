@@ -1,7 +1,7 @@
 # Product level analysis of Japan's trade statistics
 
  As a part of MACS30123 Large-Scale Computing for the Social Sciences, this personal project works on 
- [Japanese Trade Statistics](https://www.e-stat.go.jp/en/stat-search/files?page=1&toukei=00350300&tstat=000001013141) and conducts 
+ Japanese Trade Statistics and conducts 
  Big Data analysis with Data Visualization and Regression. 
  
 ## Social science research problem
@@ -154,7 +154,9 @@ First, we conduct some basic data visualization to check the data is properly co
 
 3. Time series of top 10 products in HScode basis. 
 
-    * 
+    * HS2 code 84, 85 and 87 (see legend for detail) show similar trend in export value. 
+    * Mineral fuel is the major imported product. However, the trade flow is volatile. 
+    * Some HS2 codes are common between export and import (29, 84, 85, 87, and 90). Probably this is because of GVC. 
 <p align="center">
   <img width="60%" src="images/timeseries_exporting_products.png" />
 </p>
@@ -163,8 +165,9 @@ First, we conduct some basic data visualization to check the data is properly co
   <img width="60%" src="images/timeseries_importing_products.png" />
 </p>
 
-<sub>Upper graph<br>84:Machines, 90: Optical  photographic  cinematographic  measuring  checking  precision  medical or surgical instruments and apparatus; parts and accessories thereof, 29: Organic chemicals, 39: Plastics and articles thereof, 19: Preparations of cereals  flour  starch or milk; pastrycooks' products, 85: Electrical machinery and equipment and parts thereof; sound recorders and reproducers  television image and sound recorders and reproducers  and parts and accessories of such articles, 87: Aircraft spacecraft and parts thereof, 72: Iron and steel, 73: Articles of iron or steel, 89: Ships boats and floating structures</sub>
+<sub>Upper graph<br>84:Machines, 90: Optical photographic cinematographic measuring checking precision medical or surgicalinstruments and apparatus; parts and accessories thereof, 29: Organic chemicals, 39: Plastics and articles thereof, 19: Preparations of cereals flour starch or milk; pastrycooks'products, 85: Electrical machinery and equipment and parts thereof; sound recorders and reproducers  television image and sound recorders and reproducers and parts and accessories of such articles, 87: Aircraft spacecraft and parts thereof, 72: Iron and steel, 73: Articles of iron or steel, 89: Ships boats and floating structures</sub>
 
+<sub>Lower graph<br>27: Mineral fuels mineral oils and products of their distillation; bituminous substances; mineral waxes, 90: Optical  photographic  cinematographic  measuring  checking  precision  medical or surgical instruments and apparatus; parts and accessories thereof, 29: Organic chemicals, 84: Machines, 44: Wood and articles of wood; wood charcoal, 26: Ores slag and ash, 87: Vehicles other than railway or tramway rolling-stock  and parts and accessories thereof, 71: Natural or cultured pearls  precious or semi-precious stones  precious metals  metals clad with precious metal and articles thereof; imitation jewellery; coin, 85: Electrical machinery and equipment and parts thereof; sound recorders and reproducers  television image and sound recorders and reproducers  and parts and accessories of such articles, 30: Pharmaceutical products.</sub>
 
 ## Disscussion and Conclusion
 
