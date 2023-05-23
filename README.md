@@ -190,6 +190,7 @@ Please note that there are several limitations in this estimation. Firstly, in t
 
 ## Disscussion and Conclusion
 
+Our project implies that the relationship between trade flows and exchange rates are weaker than expected and do not support J-curve hypothesis generally. This is important insights for policymakers because it implies there are more significant factors that matters. Although it is out of scope to mention the precise reasons, there should be more structural reasons in industry and demand that determines 
 
 ## References
 
