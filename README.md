@@ -107,7 +107,7 @@ $$
 * Run ARDL with Dask: [ARDL_dask.ipynb](https://github.com/macs30123-s23/final-project-ayako/blob/main/ARDL_dask.ipynb)
 
     * Run multiple ARDL regression for import and export for all hs2 codes. 
-    * Extract model summary and output results to csv. ([link](https://github.com/macs30123-s23/final-project-ayako/tree/main/results))
+    * Extract model summary and calculate coefficients. 
     * Use Dask because ARDL model is available in latest statsmodels library and we could not install to Pysark. We configure Dask environment as follows where bootstrap code is stored [here](https://github.com/macs30123-s23/final-project-ayako/blob/main/bootstrap). 
 
    ```
@@ -168,6 +168,9 @@ First, we conduct some basic data visualization to check the data is properly co
 <sub>Upper graph<br>84:Machines, 90: Optical photographic cinematographic measuring checking precision medical or surgicalinstruments and apparatus; parts and accessories thereof, 29: Organic chemicals, 39: Plastics and articles thereof, 19: Preparations of cereals flour starch or milk; pastrycooks'products, 85: Electrical machinery and equipment and parts thereof; sound recorders and reproducers  television image and sound recorders and reproducers and parts and accessories of such articles, 87: Aircraft spacecraft and parts thereof, 72: Iron and steel, 73: Articles of iron or steel, 89: Ships boats and floating structures</sub>
 
 <sub>Lower graph<br>27: Mineral fuels mineral oils and products of their distillation; bituminous substances; mineral waxes, 90: Optical  photographic  cinematographic  measuring  checking  precision  medical or surgical instruments and apparatus; parts and accessories thereof, 29: Organic chemicals, 84: Machines, 44: Wood and articles of wood; wood charcoal, 26: Ores slag and ash, 87: Vehicles other than railway or tramway rolling-stock  and parts and accessories thereof, 71: Natural or cultured pearls  precious or semi-precious stones  precious metals  metals clad with precious metal and articles thereof; imitation jewellery; coin, 85: Electrical machinery and equipment and parts thereof; sound recorders and reproducers  television image and sound recorders and reproducers  and parts and accessories of such articles, 30: Pharmaceutical products.</sub>
+
+### ARDL
+
 
 ## Disscussion and Conclusion
 
