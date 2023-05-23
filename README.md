@@ -39,18 +39,17 @@ Since their is a mismatch between country codes between trade dataset and IMF da
 
 ## Model
 
-We run ARDL model with statsmodels package. Particulary, [UECM](https://www.statsmodels.org/devel/tsa.html#error-correction-models-ecm) is used based on [3] and [4], which can be described as following. 
+We run Panel ARDL model with statsmodels package. Particulary, [Panel OLS](https://bashtage.github.io/linearmodels/panel/panel/linearmodels.panel.model.PanelOLS.html) is used based on [3] and [4], which can be described as following. 
 
 $$
 \begin{align}
-\Delta\log(Export_{i,t}) &= \delta_0 + \lambda_0\log(Export_{t-1})+\lambda_1\log(EX_{t-1})+\lambda_2\log(GDP_{t-1})\\
-&+\sum_{j=1}^3\phi_j\Delta\log(Export_{t-j})+\sum_{j=0}^3\rho_j\Delta\log(EX_{t-j})+\sum_{j=0}^3\eta_j\Delta\log(GDP_{t-j})+\varepsilon_t\\
-\Delta\log(Import_{i,t}) &= \delta_0 + \lambda_0\log(Import_{t-1})+\lambda_1\log(EX_{t-1})+\lambda_2\log(JapanGDP_{t-1})\\
-&+\sum_{j=1}^3\phi_j\Delta\log(Import_{t-j})+\sum_{j=0}^3\rho_j\Delta\log(EX_{t-j})+\sum_{j=0}^3\eta_j\Delta\log(JapanGDP_{t-j})+\varepsilon_t
+\Delta\log(Y_{i,c,t}) &= \delta_0 + \lambda_0\log(Y_{c,t-1})+\lambda_1\log(EX_{c,t-1})+\lambda_2\log(GDP_{c, t-1})\\
+&+\sum_{j=1}^3\phi_j\Delta\log(Y_{t-j})+\sum_{j=0}^3\rho_j\Delta\log(EX_{t-j})+\sum_{j=0}^3\eta_j\Delta\log(GDP_{t-j})\\
+&+\alpha country_c+\beta time_t+ \varepsilon_{c,t}
 \end{align}
 $$
 
-The subscript $i$ is for product and $t$ is for time. $Export,Import$ is the value of trade flows. $EX$ is exchange rate (Domestic Currency/Japan Yen). $GDP$ in the first equation is trading's partner GDP. $Japan_GDP$ is Japan's GDP. Our dataset contains 88 unique hs2 codes so that we run 176 regressions. The time period is 1988Q1-2023Q1. Missing value is droped. 
+The subscript $i$ is for product, $c$ is for country, and $t$ is for time. $Y$ is the value of trade flows of export and import respectively. $EX$ is exchange rate (Domestic Currency/Japan Yen). $GDP$ in the first equation is trading's partner GDP. $country$ is for entity fixed effect and $time$ is for time fixed effect. Our dataset contains 88 unique hs2 codes so that we run 176 regressions. The time period is 1988Q1-2023Q1. Missing value is droped. 
 
 We are interested in exchange rate elasticities. We can derive short and long-run coefficients following [3] and [4]. 
 
