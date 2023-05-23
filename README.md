@@ -173,6 +173,10 @@ First, we conduct some basic data visualization to check the data is properly co
 
 The estimation results of ARDL models are shown below. The export table are sorted by long-term coefficient in ascending order. Theoritically, if the Japan's currency devaluate, the import should increase in long-term. In our model, the exchange rate is defined as trading partner's currency/Japan Yen, the coefficients should be negative if the hypothesis is true. However, the number of products that have negative coefficients is less than positive ones. For major products mentioned in data visualization, 72, 84, and 90 have a positive value, and other coefficients are insignificant. We also observe the absolute values of coefficients are less than [3] with the U.S. Furthermore, this is consistent with [5] where trade elastistity is becoming less significant. 
 
+For import results, contrary to export case, the positive value aligns with theory. However, only 19 out of 87 product have significant values. This is similar to [3]. Note that among major HS2 codes, only 30 and 44 have coefficients with significant values but the signs are opposite. 
+
+
+
 <p align="center">
   <figcaption>Export Results</figcaption>
   <img width="60%" src="images/export_reg.png" />
