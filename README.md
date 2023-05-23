@@ -190,7 +190,11 @@ Please note that there are several limitations in this estimation. Firstly, in t
 
 ## Disscussion and Conclusion
 
-Our project implies that the relationship between trade flows and exchange rates are weaker than expected and do not support J-curve hypothesis generally. This is important insights for policymakers because it implies there are more significant factors that matters. Although it is out of scope to mention the precise reasons, there should be more structural reasons in industry and demand that determines 
+Our project findings suggest that the relationship between trade flows and exchange rates is weaker than expected, providing limited support for the J-curve hypothesis. This insight is crucial for policymakers as it indicates that there are other significant factors influencing trade flows. While we did not delve into specific reasons within the scope of this study, it is evident that industry structures and demand play a crucial role in determining trade flows.
+
+From a large-scale computing perspective, employing Pyspark proved to be highly effective in handling large datasets. However, working with econometric models posed challenges as neither PySpark nor Dask support the majority of models available in Stata or R. Therefore, considering the utilization of Stata in the Midway2 environment might be a more suitable option for future endeavors involving econometrics.
+
+In conclusion, our project contributes to the understanding of the intricate relationship between exchange rates and trade flows. While the J-curve hypothesis did not hold strong empirical support, it highlights the importance of considering other factors influencing trade dynamics. Further research and analysis are necessary to explore and identify the structural reasons within industries and demand that exert significant influence on trade flows. 
 
 ## References
 
