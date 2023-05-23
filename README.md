@@ -175,7 +175,7 @@ The estimation results of ARDL models are shown below. The export table are sort
 
 For import results, contrary to export case, the positive value aligns with theory. However, only 19 out of 87 product have significant values. This is similar to [3]. Note that among major HS2 codes, only 30 and 44 have coefficients with significant values but the signs are opposite. 
 
-
+Please note that we have several limitation in this estimation. First, in import model, we should include Japan GDP instead of trading partner's GDP. Second, we show p-values of $\lambda_1,\rho_j$ instead of normalized one. This is because there is limited flexibility in python package and we need to use Stata to conduct such analysis. 
 
 <p align="center">
   <figcaption>Export Results</figcaption>
