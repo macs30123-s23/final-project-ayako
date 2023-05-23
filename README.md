@@ -171,11 +171,11 @@ First, we conduct some basic data visualization to check the data is properly co
 
 ### ARDL results
 
-The estimation results of ARDL models are shown below. The export table are sorted by long-term coefficient in ascending order. Theoritically, if the Japan's currency devaluate, the import should increase in long-term. In our model, the exchange rate is defined as trading partner's currency/Japan Yen, the coefficients should be negative if the hypothesis is true. However, the number of products that have negative coefficients is less than positive ones. For major products mentioned in data visualization, 72, 84, and 90 have a positive value, and other coefficients are insignificant. We also observe the absolute values of coefficients are less than [3] with the U.S. Furthermore, this is consistent with [5] where trade elastistity is becoming less significant. 
+The estimation results of the ARDL models are presented below. The export table is sorted in ascending order based on the long-term coefficient. In theory, if Japan's currency depreciates, exports should increase in the long term. In our model, the exchange rate is defined as the trading partner's currency divided by the Japanese Yen. The coefficients should be negative if the hypothesis is true. However, the number of products with negative coefficients is lower than those with positive coefficients. Among the major products highlighted in the data visualization, product codes 72, 84, and 90 have positive coefficients, while the remaining coefficients are insignificant. Additionally, we observe that the absolute values of the coefficients are smaller than those reported in [3] for the United States. This observation is consistent with [5], which suggests a decreasing significance of trade elasticity in Japan.
 
-For import results, contrary to export case, the positive value aligns with theory. However, only 19 out of 87 product have significant values. This is similar to [3]. Note that among major HS2 codes, only 30 and 44 have coefficients with significant values but the signs are opposite. 
+Regarding the import results, in contrast to the export case, the positive coefficient values align with the theoretical expectations. However, out of the 87 products, only 19 have coefficients that are statistically significant, similar to the findings in [3]. It is worth noting that among the major HS2 codes, only product codes 30 and 44 have coefficients with significant values, but their signs are opposite.
 
-Please note that we have several limitation in this estimation. First, in import model, we should include Japan GDP instead of trading partner's GDP. Second, we show p-values of $\lambda_1,\rho_j$ instead of normalized one. This is because there is limited flexibility in python package and we need to use Stata to conduct such analysis. 
+Please note that there are several limitations in this estimation. Firstly, in the import model, it would be more appropriate to include Japan's GDP instead of the trading partner's GDP. Secondly, we present the p-values for $\lambda_1$ and $\rho_j$ instead of normalized values. This is due to the limited flexibility of the Python package used for analysis, and it is better to use Stata for conducting this analysis.  
 
 <p align="center">
   <figcaption>Export Results</figcaption>
@@ -186,7 +186,6 @@ Please note that we have several limitation in this estimation. First, in import
   <figcaption>Import Results</figcaption>
   <img width="60%" src="images/import_reg.png" />
 </p>
-
 
 
 ## Disscussion and Conclusion
