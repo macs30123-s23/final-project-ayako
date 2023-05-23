@@ -98,9 +98,10 @@ $$
 * Prepare data for ARDL analysis with pyspark: [data_manipulation_ARDL_pyspark.ipynb](https://github.com/macs30123-s23/final-project-ayako/blob/main/data_manipulation_ARDL_pyspark.ipynb)
 
     * Merge trade data with exchange rate data (monthly data). 
-    * Aggregate monthly data to quarterly data. Sum export value and average exchange rate. 
+    * Aggregate monthly data to quarterly data and hs9 codes to hs2 codes. Sum export value and average exchange rate. 
     * Merge quarterly data with GDP data. 
     * Change numerical data to log base. 
+    * Add lag and difference variables. 
     * Similarly used Pyspark to work on large dataset. 
 
 * Run ARDL with Dask: [ARDL_dask.ipynb](https://github.com/macs30123-s23/final-project-ayako/blob/main/ARDL_dask.ipynb)
@@ -127,6 +128,9 @@ $$
 First, we conduct some basic data visualization to check the data is properly collected. 
 
 1. Top 10 trading partners
+
+    * The U.S. and China are the major trading partner in both export and import. 
+    * Japan exports to many asian countries (China, Korea, Taiwan, Hong Kong, Thailand, Singapore, and Malaysia), while it imports from resource-rich countries (United States, Australia, Saudi Arabia, and United Arab Emirates)  
 <p align="center">
   <img width="60%" src="images/exporting_partners.png" />
 </p>
@@ -136,6 +140,8 @@ First, we conduct some basic data visualization to check the data is properly co
 </p>
 
 2. Time series of trade flows value in Top 10 trading partners
+
+    *
 <p align="center">
   <img width="60%" src="images/timeseries_exporting_partners.png" />
 </p>
