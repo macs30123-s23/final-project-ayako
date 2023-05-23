@@ -141,7 +141,9 @@ First, we conduct some basic data visualization to check the data is properly co
 
 2. Time series of trade flows value in Top 10 trading partners
 
-    *
+    * The trades with China have grown rapidly. 
+    * The U.S. has been a stable trading partner over the year. 
+    * Large drops in trade value are observed around 2009 and 2020 due to crises. 
 <p align="center">
   <img width="60%" src="images/timeseries_exporting_partners.png" />
 </p>
@@ -150,9 +152,9 @@ First, we conduct some basic data visualization to check the data is properly co
   <img width="60%" src="images/timeseries_importing_partners.png" />
 </p>
 
-3. Top 10 products
+3. Time series of top 10 products in HScode basis. 
 
-4. Time series of top 10 products in HScode basis. 
+    * 
 <p align="center">
   <img width="60%" src="images/timeseries_exporting_products.png" />
 </p>
@@ -161,6 +163,7 @@ First, we conduct some basic data visualization to check the data is properly co
   <img width="60%" src="images/timeseries_importing_products.png" />
 </p>
 
+<sub>Upper graph<br>84:Machines, 90: Optical  photographic  cinematographic  measuring  checking  precision  medical or surgical instruments and apparatus; parts and accessories thereof, 29: Organic chemicals, 39: Plastics and articles thereof, 19: Preparations of cereals  flour  starch or milk; pastrycooks' products, 85: Electrical machinery and equipment and parts thereof; sound recorders and reproducers  television image and sound recorders and reproducers  and parts and accessories of such articles, 87: Aircraft spacecraft and parts thereof, 72: Iron and steel, 73: Articles of iron or steel, 89: Ships boats and floating structures</sub>
 
 
 ## Disscussion and Conclusion
