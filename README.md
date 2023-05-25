@@ -39,7 +39,7 @@ Since their is a mismatch between country codes between trade dataset and IMF da
 
 ## Model
 
-We run Panel ARDL model with statsmodels package. Particulary, [Panel OLS](https://bashtage.github.io/linearmodels/panel/panel/linearmodels.panel.model.PanelOLS.html) is used based on [3] and [4], which can be described as following. 
+We run Panel ARDL model (Autoregressive distributed lag model) with statsmodels package. Particulary, [Panel OLS](https://bashtage.github.io/linearmodels/panel/panel/linearmodels.panel.model.PanelOLS.html) is used based on [3] and [4], which can be described as following. 
 
 $$
 \begin{align}
