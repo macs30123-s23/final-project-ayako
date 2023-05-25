@@ -1,4 +1,4 @@
-# Product level analysis of Japan's trade statistics
+# Product level analysis of Japan's trade elasticities
 
  As a part of MACS30123 Large-Scale Computing for the Social Sciences, this personal project works on 
  Japanese Trade Statistics and conducts 
